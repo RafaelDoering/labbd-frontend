@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { Admin, Resource, ListGuesser } from 'react-admin';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import authProvider from './providers/authProvider';
+import dataProvider from './providers/dataProvider';
+import MyLogoutButton from './LogoutButton';
+
+import { PatientList } from './lists/patientList';
+import { HospitalList } from './lists/hospitalList';
+import { ResearcherList } from './lists/researcherList';
+
+import dashboard from './dashboard';
+
+const App = () => (
+  <Admin logoutButton={MyLogoutButton} dashboard={dashboard} authProvider={authProvider} dataProvider={dataProvider}>
+    <Resource name="reports/patients" list={PatientList} />
+    <Resource name="reports/hospitals" list={HospitalList} />
+    <Resource name="reports/researchers" list={ResearcherList} />
+  </Admin>
+);
 
 export default App;
