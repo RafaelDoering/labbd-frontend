@@ -1,12 +1,13 @@
 import { fetchUtils } from 'react-admin';
 
-const apiUrl = 'http://localhost:8080/api';
+import { backendUrl } from './../config';
+
 const httpClient = fetchUtils.fetchJson;
 
 export default {
   // called when the user attempts to log in
   login: ({ username, password }) =>  {
-    const url = `${apiUrl}/auth/login`;
+    const url = `${backendUrl}/auth/login`;
     const options = {
       method: 'POST',
       body: JSON.stringify({ userId: username, password }),

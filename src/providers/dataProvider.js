@@ -1,7 +1,8 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-const apiUrl = 'http://localhost:8080/api';
+import { backendUrl } from './../config';
+
 const httpClient = fetchUtils.fetchJson;
 
 export default {
@@ -14,7 +15,7 @@ export default {
       offset: (page - 1) * perPage,
       filter: JSON.stringify(params.filter),
     };
-    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    const url = `${backendUrl}/${resource}?${stringify(query)}`;
 
     return httpClient(url)
       .then(({ headers, json }) => {
@@ -26,7 +27,7 @@ export default {
   },
 
   getOne: (resource, params) => {
-    const url = `${apiUrl}/${resource}/${params.id}`;
+    const url = `${backendUrl}/${resource}/${params.id}`;
 
     return httpClient(url)
       .then(({ json }) => {
@@ -38,7 +39,7 @@ export default {
     const query = {
       filter: JSON.stringify({ id: params.ids }),
     };
-    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    const url = `${backendUrl}/${resource}?${stringify(query)}`;
 
     return httpClient(url)
       .then(({ json }) => {
@@ -57,7 +58,7 @@ export default {
         [params.target]: params.id,
       }),
     };
-    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    const url = `${backendUrl}/${resource}?${stringify(query)}`;
 
     return httpClient(url)
       .then(({ headers, json }) => {
@@ -69,7 +70,7 @@ export default {
   },
 
   update: (resource, params) => {
-    const url = `${apiUrl}/${resource}/${params.id}`;
+    const url = `${backendUrl}/${resource}/${params.id}`;
     const options = {
       method: 'PUT',
       body: JSON.stringify(params.data),
@@ -85,7 +86,7 @@ export default {
     const query = {
         filter: JSON.stringify({ id: params.ids}),
     };
-    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    const url = `${backendUrl}/${resource}?${stringify(query)}`;
     const options = {
       method: 'PUT',
       body: JSON.stringify(params.data),
@@ -98,7 +99,7 @@ export default {
   },
 
   create: (resource, params) => {
-    const url = `${apiUrl}/${resource}`;
+    const url = `${backendUrl}/${resource}`;
     const options = {
       method: 'POST',
       body: JSON.stringify(params.data),
@@ -111,7 +112,7 @@ export default {
   },
 
   delete: (resource, params) => {
-    const url = `${apiUrl}/${resource}/${params.id}`;
+    const url = `${backendUrl}/${resource}/${params.id}`;
     const options = {
       method: 'DELETE',
     };
@@ -126,7 +127,7 @@ export default {
     const query = {
       filter: JSON.stringify({ id: params.ids}),
     };
-    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    const url = `${backendUrl}/${resource}?${stringify(query)}`;
     const options = {
       method: 'DELETE',
       body: JSON.stringify(params.data),
