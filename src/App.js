@@ -14,10 +14,16 @@ import dashboard from './dashboard';
 
 const App = () => (
   <Admin logoutButton={MyLogoutButton} dashboard={dashboard} authProvider={authProvider} dataProvider={dataProvider}>
-    <Resource name="reports/pacientes" options={{ label: 'Pacientes' }} list={PatientList} />
-    <Resource name="reports/hospitais" options={{ label: 'Hospitais' }} list={HospitalList} />
-    <Resource name="reports/pesquisadores" options={{ label: 'Pesquisadores' }} list={ResearcherList} />
-    <Resource name="reports/laboratorios" options={{ label: 'Laboratórios' }} list={LaboratoryList} />
+    {permissions => [
+        <Resource name="reports/pacientes" options={{ label: 'Pacientes' }} list={PatientList} />,
+        <Resource name="reports/pesquisadores" options={{ label: 'Pesquisadores' }} list={ResearcherList} />,
+        permissions === 'Medicina' || permissions === 'Admin'
+          ? <Resource name="reports/hospitais" options={{ label: 'Hospitais' }} list={HospitalList} />
+          : null,
+        permissions === 'Pesquisa' || permissions === 'Admin'
+          ? <Resource name="reports/laboratorios" options={{ label: 'Laboratórios' }} list={LaboratoryList} />
+          : null,
+    ]}
   </Admin>
 );
 

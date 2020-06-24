@@ -18,32 +18,38 @@ export default {
         if (response.status < 200 || response.status >= 300) {
           throw new Error(response.statusText);
         }
-        localStorage.setItem('username', 'test');
-        //return response.json();
+        const responseJson = JSON.parse(response.body);
+        localStorage.setItem('token', responseJson.token);
+        localStorage.setItem('departamento', responseJson.departamento);
+        localStorage.setItem('id', responseJson.id);
       })
-      /*.then(({ token }) => {
-        localStorage.setItem('token', token);
-      });*/
   },
   // called when the user clicks on the logout button
   logout: () => {
-      localStorage.removeItem('username');
-      return Promise.resolve();
+    localStorage.removeItem('token');
+    localStorage.removeItem('departamento');
+    localStorage.removeItem('id');
+    return Promise.resolve();
   },
   // called when the API returns an error
   checkError: ({ status }) => {
     if (status === 401 || status === 403) {
-      localStorage.removeItem('username');
+      localStorage.removeItem('token');
+      localStorage.removeItem('departamento');
+      localStorage.removeItem('id');
       return Promise.reject();
     }
     return Promise.resolve();
   },
   // called when the user navigates to a new location, to check for authentication
   checkAuth: () => {
-    return localStorage.getItem('username')
+    return localStorage.getItem('token')
       ? Promise.resolve()
       : Promise.reject();
   },
   // called when the user navigates to a new location, to check for permissions / roles
-  getPermissions: () => Promise.resolve(),
+  getPermissions: () => {
+    const role = localStorage.getItem('departamento');
+    return role ? Promise.resolve(role) : Promise.reject();
+  },
 };
