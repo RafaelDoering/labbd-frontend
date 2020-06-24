@@ -1,12 +1,9 @@
 import * as React from "react";
-import { List, Datagrid, TextField, NumberField, Filter, ReferenceInput, SelectInput, TextInput } from 'react-admin';
+import { List, Datagrid, TextField, NumberField, Filter, TextInput } from 'react-admin';
 
 const PatientFilter = (props) => (
   <Filter {...props}>
-    <TextInput label="Pesquisar" source="q" alwaysOn />
-    <ReferenceInput label="Nome" source="nome" reference="reports/pacientes" allowEmpty>
-      <SelectInput optionText="nome" />
-    </ReferenceInput>
+    <TextInput label="Nome" source="q" alwaysOn />
   </Filter>
 );
 

@@ -1,12 +1,9 @@
 import * as React from "react";
-import { List, Datagrid, TextField, NumberField, DateField, Filter, ReferenceInput, SelectInput, TextInput } from 'react-admin';
+import { List, Datagrid, TextField, NumberField, DateField, Filter, TextInput } from 'react-admin';
 
 const ResearcherFilter = (props) => (
   <Filter {...props}>
-    <TextInput label="Pesquisar" source="q" alwaysOn />
-    <ReferenceInput label="Nome do pesquisador" source="nome_do_pesquisador" reference="reports/pesquisadores" allowEmpty>
-      <SelectInput optionText="nome_do_pesquisador" />
-    </ReferenceInput>
+    <TextInput label="Nome do pesquisador" source="q" alwaysOn />
   </Filter>
 );
 
