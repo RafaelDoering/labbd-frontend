@@ -13,9 +13,9 @@ import dashboard from './dashboard';
 
 const App = () => (
   <Admin logoutButton={MyLogoutButton} dashboard={dashboard} authProvider={authProvider} dataProvider={dataProvider}>
-    <Resource name="reports/patients" list={PatientList} />
-    <Resource name="reports/hospitals" list={HospitalList} />
-    <Resource name="reports/researchers" list={ResearcherList} />
+    <Resource name="reports/pacientes" options={{ label: 'Pacientes' }} list={PatientList} />
+    <Resource name="reports/hospitais" options={{ label: 'Hospitais' }} list={HospitalList} />
+    <Resource name="reports/pesquisadores" options={{ label: 'Pesquisadores' }} list={ResearcherList} />
   </Admin>
 );
 
