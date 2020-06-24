@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Admin, Resource, ListGuesser, EditGuesser } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 
 import authProvider from './providers/authProvider';
 import dataProvider from './providers/dataProvider';
@@ -8,6 +8,7 @@ import MyLogoutButton from './LogoutButton';
 import { PatientList } from './lists/patientList';
 import { HospitalList } from './lists/hospitalList';
 import { TreatmentList } from './lists/treatmentList';
+import { SampleList } from './lists/sampleList';
 import { ResearcherList } from './lists/researcherList';
 import { LaboratoryList } from './lists/laboratoryList';
 
@@ -26,9 +27,9 @@ const App = () => (
         permissions === 'Pesquisa' || permissions === 'Admin'
           ? <Resource name="reports/laboratorios" options={{ label: 'Laboratórios' }} list={LaboratoryList} />
           : null,
-        /*permissions === 'Pesquisa' || permissions === 'Admin'
-          ? <Resource name="reports/amostras" options={{ label: 'Amostras' }} list={ListGuesser} />
-          : null,*/
+        permissions === 'Pesquisa' || permissions === 'Admin'
+          ? <Resource name="reports/amostras" options={{ label: 'Amostras' }} list={SampleList} />
+          : null,
         permissions === 'Admin'
           ? <Resource name="reports/pesquisadores" options={{ label: 'Pesquisadores' }} list={ResearcherList} />
           : null,
